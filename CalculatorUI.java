@@ -127,6 +127,68 @@ public class CalculatorUI implements ActionListener {
                 }
             }
         }
+
+        // Handling operator buttons
+        if (e.getSource() == addButton) {
+            num1 = Double.parseDouble(textField.getText());
+            operator = '+';
+            textField.setText("");
+            isResultDisplayed = false;
+        }
+
+        if (e.getSource() == subButton) {
+            num1 = Double.parseDouble(textField.getText());
+            operator = '-';
+            textField.setText("");
+            isResultDisplayed = false;
+        }
+
+        if (e.getSource() == mulButton) {
+            num1 = Double.parseDouble(textField.getText());
+            operator = '*';
+            textField.setText("");
+            isResultDisplayed = false;
+        }
+
+        if (e.getSource() == divButton) {
+            num1 = Double.parseDouble(textField.getText());
+            operator = '/';
+            textField.setText("");
+            isResultDisplayed = false;
+        }
+
+        if (e.getSource() == modButton) {
+            num1 = Double.parseDouble(textField.getText());
+            operator = '%';
+            textField.setText("");
+            isResultDisplayed = false;
+        }
+
+        // Handling the equals button
+        if (e.getSource() == equButton) {
+            num2 = Double.parseDouble(textField.getText());
+            switch (operator) {
+                case '+': result = num1 + num2; break;
+                case '-': result = num1 - num2; break;
+                case '*': result = num1 * num2; break;
+                case '/': 
+                    if (num2 != 0) {
+                        result = num1 / num2;
+                    } else {
+                        textField.setText("ERR");
+                        return;
+                    }
+                    break;
+                case '%': result = num1 % num2; break;
+            }
+            // Display result
+            if (String.valueOf(result).length() > 8) {
+                textField.setText("ERR");
+            } else {
+                textField.setText(String.valueOf(result));
+                isResultDisplayed = true;
+            }
+        }
     }
 
     // Main method to run the program
