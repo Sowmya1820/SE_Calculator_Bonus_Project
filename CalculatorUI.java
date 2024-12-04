@@ -98,14 +98,39 @@ public class CalculatorUI implements ActionListener {
         frame.setVisible(true);
     }
 
-    // Required method for ActionListener
     @Override
     public void actionPerformed(ActionEvent e) {
-        // Placeholder for handling button actions
+        // Handling number buttons
+        for (int i = 0; i < 10; i++) {
+            if (e.getSource() == numberButtons[i]) {
+                if (isResultDisplayed) {
+                    textField.setText(""); // Clear the text field if a result was displayed
+                    isResultDisplayed = false;
+                }
+                if (textField.getText().length() < 8) { // Limit to 8 digits
+                    textField.setText(textField.getText() + i);
+                }
+            }
+        }
+
+        // Handling the decimal button
+        if (e.getSource() == decButton) {
+            if (isResultDisplayed) {
+                textField.setText(""); // Clear the text field if a result was displayed
+                isResultDisplayed = false;
+            }
+            if (!textField.getText().contains(".")) {
+                if (textField.getText().isEmpty()) {
+                    textField.setText("0."); // Start with 0 if the field is empty
+                } else {
+                    textField.setText(textField.getText() + ".");
+                }
+            }
+        }
     }
 
     // Main method to run the program
     public static void main(String[] args) {
-        new CalculatorUI(); 
+        new CalculatorUI(); // Create an instance of the updated calculator
     }
 }
