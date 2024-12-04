@@ -189,6 +189,50 @@ public class CalculatorUI implements ActionListener {
                 isResultDisplayed = true;
             }
         }
+
+        // Handling negation button
+        if (e.getSource() == negButton) {
+            double temp = Double.parseDouble(textField.getText());
+            temp *= -1; // Toggle the sign
+            textField.setText(String.valueOf(temp));
+        }
+
+        // Handling square root button
+        if (e.getSource() == sqrtButton) {
+            double temp = Double.parseDouble(textField.getText());
+            if (temp < 0) {
+                textField.setText("ERR"); // Error for negative input
+            } else {
+                textField.setText(String.valueOf(Math.sqrt(temp))); // Compute square root
+                isResultDisplayed = true;
+            }
+        }
+
+        // Handling logarithm button
+        if (e.getSource() == logButton) {
+            double temp = Double.parseDouble(textField.getText());
+            if (temp <= 0) {
+                textField.setText("ERR"); // Error for non-positive input
+            } else {
+                textField.setText(String.valueOf(Math.log10(temp))); // Compute base-10 logarithm
+                isResultDisplayed = true;
+            }
+        }
+
+        // Handling Clear button (C)
+        if (e.getSource() == clrButton) {
+            textField.setText(""); // Clear the current input
+        }
+
+        // Handling All Clear button (AC)
+        if (e.getSource() == delButton) {
+            textField.setText("0"); // Reset the screen to 0
+            num1 = 0;
+            num2 = 0;
+            result = 0;
+            operator = '\0'; // Reset the operator
+            isResultDisplayed = false; // Reset the result flag
+        }
     }
 
     // Main method to run the program
